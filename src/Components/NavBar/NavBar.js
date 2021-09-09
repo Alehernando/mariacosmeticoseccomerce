@@ -1,6 +1,6 @@
-import './NavBar.css';
+import './navBar.css';
 import CartWidget from '../CartWidget/CartWidget';
- 
+
 const NavBar = () => {
     return (
         <div className="container">
