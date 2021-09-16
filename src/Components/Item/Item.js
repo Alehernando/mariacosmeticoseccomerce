@@ -1,25 +1,23 @@
+import { useState, useEffect } from 'react';
 
-const Item = [ 
-    {
-     id:'1', 
-     title:'Labial', 
-     description:'Labial Rojo', 
-     price: '1500', 
-     stock:'5'}, 
-
-    {
-     id:'2', 
-     title:'Sombras Maquillaje', 
-     description:'Sombras Tricolor Noche', 
-     price: '3500', 
-     stock:'10'}, 
-     
-     {
-      id:'3', 
-      tilte:'Perfume', 
-      description:'Perfume Coco Channel', 
-      price: '5500', 
-      stock:'3'} 
-    ];
-
+const Cosmeticos = () => {
+    return new Promise((resolve, reject) => {
+        const cosmetico = [
+            { id: '01', marca: 'Revlon', producto: 'Sombra de ojos', price: 500, stock: 5 },
+            { id: '02', marca: 'Lancome', producto: 'Rubor Beige', price: 1000, stock: 6 },
+            { id: '03', marca: 'Mac', producto: 'Labial Rojo', price: 1500, stock: 7 },
+        ];
+        setTimeout(() => resolve(cosmetico), 2000);
+    });
+};
+const Item = () => {
+    const [items, setItems] = useState([]);
+    useEffect(() => {
+        const listItems = Cosmeticos();
+        listItems.then((result) => setItems(result));
+        return () => {
+            setItems([items]);
+        };
+    }, []);
+};
 export default Item;
