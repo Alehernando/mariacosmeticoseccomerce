@@ -1,23 +1,21 @@
-import { useState, useEffect } from 'react';
-
-const Cosmeticos = () => {
-    return new Promise((resolve, reject) => {
-        const cosmetico = [
-            { id: '01', marca: 'Revlon', producto: 'Sombra de ojos', price: 500, stock: 5 },
-            { id: '02', marca: 'Lancome', producto: 'Rubor Beige', price: 1000, stock: 6 },
-            { id: '03', marca: 'Mac', producto: 'Labial Rojo', price: 1500, stock: 7 },
-        ];
-        setTimeout(() => resolve(cosmetico), 2000);
-    });
-};
-const Item = () => {
-    const [items, setItems] = useState([]);
-    useEffect(() => {
-        const listItems = Cosmeticos();
-        listItems.then((result) => setItems(result));
-        return () => {
-            setItems([items]);
-        };
-    }, []);
+import { Link } from 'react-router-dom';
+ 
+const Item = ({ product }) => {
+    return (
+        <div className="CardItem">
+            <div className="ContainerItem">
+                <h2 className="ItemHeader">{product.name}</h2>
+            </div>
+            <img src={product.img} alt={product.name} className="ItemImg" />
+            <h6 className="Info">{`Categoria: ${product.category} `}</h6>
+            <h6 className="Info">{`Precio: ${product.price} `}</h6>
+            {product.quantity && <h6 className="Info">{`Cantidad a comprar: ${product.quantity} `}</h6>}
+            {!product.quantity && (
+                <Link to={`/item/${product.id}`} className="Button">
+                    Comprar
+                </Link>
+            )}
+        </div>
+    );
 };
 export default Item;
